@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "286010032006",
+    "project_id": "quiztime-d4aff",
+    "storage_bucket": "quiztime-d4aff.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286010032006:android:5ce17f0068fe969f71f607",
+        "android_client_info": {
+          "package_name": "com.example.quiztime"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDez799XOs9OkpKsOCh8VE_xKmGXnMBReQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
