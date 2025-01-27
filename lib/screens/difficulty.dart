@@ -4,8 +4,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 class DifficultySelectionScreen extends StatefulWidget {
   final String category;
 
-  const DifficultySelectionScreen({Key? key, required this.category})
-      : super(key: key);
+  const DifficultySelectionScreen({super.key, required this.category});
 
   @override
   _DifficultySelectionScreenState createState() =>
@@ -38,8 +37,23 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen> {
     }
   }
 
+  Color _getColorForDifficulty(String difficulty) {
+    switch (difficulty) {
+      case "Easy":
+        return Colors.green;
+      case "Medium":
+        return Colors.orange;
+      case "Hard":
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final Color selectedColor = _getColorForDifficulty(selectedDifficulty);
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -51,7 +65,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen> {
               padding: const EdgeInsets.all(16.0),
               margin: const EdgeInsets.symmetric(horizontal: 16.0),
               decoration: BoxDecoration(
-                color: Colors.green,
+                color: selectedColor,
                 borderRadius: BorderRadius.circular(12.0),
                 boxShadow: const [
                   BoxShadow(
@@ -95,10 +109,8 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen> {
               ),
             ),
             Container(
-              width: double
-                  .infinity, // Esto hace que el contenedor ocupe todo el ancho disponible
-              alignment:
-                  Alignment.center, // Centra el botón dentro del contenedor
+              width: double.infinity,
+              alignment: Alignment.center,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: ElevatedButton(
@@ -113,7 +125,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
+                    backgroundColor: selectedColor,
                     padding: const EdgeInsets.all(16.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),
@@ -129,13 +141,11 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen> {
                 ),
               ),
             ),
-            const SizedBox(
-                height:
-                    20), // Espaciado para que no quede pegado al siguiente contenedor
+            const SizedBox(height: 20),
             Container(
               width: double.infinity,
               height: 80,
-              color: Colors.green,
+              color: selectedColor,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -160,10 +170,13 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+
+                      Navigator.pushNamed(context, "/login");
+                    },
                     icon: const Icon(
-                      LucideIcons.arrowLeft,
-                      color: Colors.green,
+                      LucideIcons.logOut,
+                      color: Color.fromARGB(255, 255, 255, 255),
                       size: 42,
                     ),
                   ),
@@ -176,7 +189,6 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen> {
     );
   }
 
-  // Widget que genera los botones de seleccion de dificultad
   Widget _buildDifficultyOption(String difficulty, Color color) {
     return ListTile(
       title: Text(
