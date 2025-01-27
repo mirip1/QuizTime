@@ -11,20 +11,19 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 30),  
+            const SizedBox(height: 30),
             Container(
               width: double.infinity,
-
-              padding: const EdgeInsets.all(16.0), 
-              margin: const EdgeInsets.symmetric(horizontal: 16.0),  
+              padding: const EdgeInsets.all(16.0),
+              margin: const EdgeInsets.symmetric(horizontal: 16.0),
               decoration: BoxDecoration(
                 color: const Color(0xFFE31749),
-                borderRadius: BorderRadius.circular(12.0), 
+                borderRadius: BorderRadius.circular(12.0),
                 boxShadow: const [
                   BoxShadow(
                     color: Colors.black26,
                     blurRadius: 4.0,
-                    offset: Offset(0, 2),  
+                    offset: Offset(0, 2),
                   ),
                 ],
               ),
@@ -52,12 +51,14 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 40),  
+            const SizedBox(height: 40),
 
             // Categorías en forma de botones
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),  // Agregar margen lateral a las categorías
+                padding: const EdgeInsets.symmetric(
+                    horizontal:
+                        16.0), // Agregar margen lateral a las categorías
                 child: GridView.count(
                   crossAxisCount: 2,
                   mainAxisSpacing: 16,
@@ -67,28 +68,44 @@ class HomeScreen extends StatelessWidget {
                       label: "Video Games",
                       color: const Color(0xFFFFA800),
                       onPressed: () {
-                        // Acción para Video Games
+                        Navigator.pushNamed(
+                          context,
+                          '/difficulty',
+                          arguments: {'category': '15'},
+                        );
                       },
                     ),
                     _buildCategoryButton(
                       label: "Computer Science",
                       color: const Color(0xFFE31749),
                       onPressed: () {
-                        // Acción para Computer Science
+                        Navigator.pushNamed(
+                          context,
+                          '/difficulty',
+                          arguments: {'category': '18'},
+                        );
                       },
                     ),
                     _buildCategoryButton(
                       label: "History",
                       color: const Color(0xFF3B28CC),
                       onPressed: () {
-                        // Acción para History
+                        Navigator.pushNamed(
+                          context,
+                          '/difficulty',
+                          arguments: {'category': '23'},
+                        );
                       },
                     ),
                     _buildCategoryButton(
                       label: "General Knowledge",
                       color: const Color(0xFF00CC4F),
                       onPressed: () {
-                        // Acción para General Knowledge
+                        Navigator.pushNamed(
+                          context,
+                          '/difficulty',
+                          arguments: {'category': '9'},
+                        );
                       },
                     ),
                   ],
@@ -115,7 +132,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () {
-                      // Acción para el botón de recargar
+                      Navigator.pop(context);
                     },
                     icon: const Icon(
                       LucideIcons.logOut,

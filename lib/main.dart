@@ -18,8 +18,8 @@ class QuizTimeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: '/login',
-        routes: appRoutes,
+        initialRoute: '/login', // Aquí defines la ruta inicial
+        onGenerateRoute: onGenerateRoute,
         theme: ThemeData(
           scaffoldBackgroundColor: const Color(0xFFFFF3E0),
         ));
