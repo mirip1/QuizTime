@@ -27,6 +27,9 @@ class _LoginScreenState extends State<LoginScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Inicio de sesión correcto")),
       );
+      Navigator.pushNamed(context, '/quiz');
+      
+                     
     } on FirebaseAuthException catch (e) {
       // Manejo de errores de Firebase Authentication
       String message;
