@@ -53,7 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           message = 'The password is too weak.';
           break;
         default:
-          message = 'Error algun dato no es valido';
+          message = 'Error there is an invalid parameter';
           
       }
       ScaffoldMessenger.of(context).showSnackBar(
