@@ -3,6 +3,7 @@ import '../screens/login.dart';
 import '../screens/register.dart';
 import '../screens/home.dart';
 import '../screens/difficulty.dart';
+import '../screens/trivia.dart'; 
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -11,6 +12,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
 
     case '/register':
       return MaterialPageRoute(builder: (_) => const RegisterScreen());
+      
 
     case '/quiz':
       return MaterialPageRoute(builder: (_) => const HomeScreen());
@@ -22,10 +24,24 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
           builder: (_) => DifficultySelectionScreen(category: args['category']),
         );
       }
-      return _errorRoute(); 
+      return _errorRoute();
+
+    case '/trivia':
+      if (settings.arguments is Map<String, dynamic>) {
+        final args = settings.arguments as Map<String, dynamic>;
+        if (args.containsKey('category') && args.containsKey('difficulty')) {
+          return MaterialPageRoute(
+            builder: (_) => TriviaScreen(
+              category: args['category'],
+              difficulty: args['difficulty'],
+            ),
+          );
+        }
+      }
+      return _errorRoute();
 
     default:
-      return _errorRoute(); 
+      return _errorRoute();
   }
 }
 

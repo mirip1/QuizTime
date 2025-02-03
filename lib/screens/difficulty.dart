@@ -117,10 +117,10 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen> {
                   onPressed: () {
                     Navigator.pushNamed(
                       context,
-                      '/game',
+                      '/trivia',
                       arguments: {
                         'category': widget.category,
-                        'difficulty': selectedDifficulty,
+                        'difficulty': selectedDifficulty.toLowerCase(),
                       },
                     );
                   },
