@@ -12,7 +12,7 @@ void main() async {
 }
 
 class QuizTimeApp extends StatelessWidget {
-  const QuizTimeApp({Key? key}) : super(key: key);
+  const QuizTimeApp({super.key});
 
   @override
   Widget build(BuildContext context) {
