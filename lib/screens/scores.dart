@@ -35,6 +35,7 @@ class _HighScoreScreenState extends State<HighScoreScreen> {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
+                
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Text(
@@ -156,7 +157,7 @@ class _HighScoreScreenState extends State<HighScoreScreen> {
                   ),
                   IconButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.pushNamed(context, "/login");
                     },
                     icon: const Icon(LucideIcons.logOut,
                         color: Colors.white, size: 32),

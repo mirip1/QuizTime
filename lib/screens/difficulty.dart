@@ -7,6 +7,7 @@ class DifficultySelectionScreen extends StatefulWidget {
   const DifficultySelectionScreen({super.key, required this.category});
 
   @override
+  // ignore: library_private_types_in_public_api
   _DifficultySelectionScreenState createState() =>
       _DifficultySelectionScreenState();
 }
@@ -171,7 +172,6 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen> {
                   ),
                   IconButton(
                     onPressed: () {
-
                       Navigator.pushNamed(context, "/login");
                     },
                     icon: const Icon(
@@ -188,22 +188,29 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen> {
       ),
     );
   }
-
+  //Metodo para construir los radio button
   Widget _buildDifficultyOption(String difficulty, Color color) {
-    return ListTile(
-      title: Text(
-        difficulty,
-        style:
-            TextStyle(fontSize: 42, fontWeight: FontWeight.bold, color: color),
-      ),
-      leading: Radio<String>(
-        value: difficulty,
-        groupValue: selectedDifficulty,
-        onChanged: (value) {
-          setState(() {
-            selectedDifficulty = value!;
-          });
-        },
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedDifficulty = difficulty;
+        });
+      },
+      child: ListTile(
+        title: Text(
+          difficulty,
+          style: TextStyle(
+              fontSize: 42, fontWeight: FontWeight.bold, color: color),
+        ),
+        leading: Radio<String>(
+          value: difficulty,
+          groupValue: selectedDifficulty,
+          onChanged: (value) {
+            setState(() {
+              selectedDifficulty = value!;
+            });
+          },
+        ),
       ),
     );
   }

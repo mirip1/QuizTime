@@ -176,7 +176,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.pushNamed(context, "/login");
                     },
                     icon: const Icon(
                       LucideIcons.logOut,

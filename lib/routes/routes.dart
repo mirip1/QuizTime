@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quiztime/screens/scores.dart';
-import '../screens/login.dart';
-import '../screens/register.dart';
-import '../screens/home.dart';
-import '../screens/difficulty.dart';
-import '../screens/trivia.dart'; 
+import '../screens/screens.dart';
+
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
