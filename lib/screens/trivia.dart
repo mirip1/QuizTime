@@ -1,8 +1,33 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../api/apiservice.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:html_unescape/html_unescape.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
+
+void _saveScoreToFirebase(String category, String difficulty, int score) async {
+  final user = FirebaseAuth.instance.currentUser;
+  if (user == null) return; // Si no hay usuario autenticado, no guardar
+
+  int finalScore = _calculateFinalScore(difficulty, score);
+
+  await FirebaseFirestore.instance.collection('highscores').add({
+    'userId': user.uid, // UID del usuario autenticado
+    'userName': user.displayName ?? 'Anónimo', // Nombre o 'Anónimo'
+    'category': category,
+    'difficulty': difficulty,
+    'score': finalScore,
+    'timestamp': FieldValue.serverTimestamp(), // Para ordenar por fecha
+  });
+}
+
+int _calculateFinalScore(String difficulty, int score) {
+  if (difficulty == 'easy') return score * 1;
+  if (difficulty == 'medium') return (score * 1.5).round();
+  if (difficulty == 'hard') return score * 2;
+  return score;
+}
 class TriviaScreen extends StatefulWidget {
   final String category;
   final String difficulty;
@@ -14,6 +39,7 @@ class TriviaScreen extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _TriviaScreenState createState() => _TriviaScreenState();
 }
 
@@ -44,7 +70,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
       }
 
       final questions = await _apiService.getQuestions(
-        amount: 30,
+        amount: 15,
         difficulty: widget.difficulty,
         category: categoryId,
         type: 'multiple',
@@ -89,6 +115,10 @@ class _TriviaScreenState extends State<TriviaScreen> {
       final currentQuestion = _questions[_currentQuestionIndex];
       _shuffledAnswers = List<String>.from(currentQuestion['shuffled_answers']);
     }
+  }
+  String formatText(String text) {
+    final unescape = HtmlUnescape();
+    return unescape.convert(text);
   }
 
   void _nextQuestion() {
@@ -249,7 +279,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
                     style: const TextStyle(color: Colors.white),
                   ),
                   Text(
-                    'Q.Number: ${_currentQuestionIndex + 1}/30',
+                    'Q.Number: ${_currentQuestionIndex + 1}/15',
                     style: const TextStyle(color: Colors.white),
                   ),
                 ],
@@ -264,8 +294,8 @@ class _TriviaScreenState extends State<TriviaScreen> {
             const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Text(
-                currentQuestion['question'],
+              child: Text(formatText(
+                currentQuestion[formatText('question')]),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 18,
@@ -277,7 +307,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
             ..._shuffledAnswers.map(
               (answer) => RadioListTile<String>(
                 title:
-                    Text(answer, style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
+                    Text(formatText(answer), style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
                 value: answer,
                 groupValue: _selectedAnswer,
                 onChanged: (value) {

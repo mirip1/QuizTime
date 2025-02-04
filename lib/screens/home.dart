@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 30),
+            const SizedBox(height: 25),
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16.0),
@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Hi again, Francis",
+                    "Look who’s back! ",
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 40),
+            const SizedBox(height: 30),
 
             // Categorías en forma de botones
             Expanded(
@@ -110,8 +110,41 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                
               ),
+              
             ),
+            //             Container(
+            //   width: double.infinity,
+            //   padding: const EdgeInsets.all(16.0),
+            //   margin: const EdgeInsets.symmetric(horizontal: 16.0),
+            //   decoration: BoxDecoration(
+            //     color: const Color(0xFFE31749),
+            //     borderRadius: BorderRadius.circular(12.0),
+            //     boxShadow: const [
+            //       BoxShadow(
+            //         color: Colors.black26,
+            //         blurRadius: 4.0,
+            //         offset: Offset(0, 2),
+            //       ),
+            //     ],
+            //   ),
+            //   child: const Column(
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: [
+            //       Text(
+            //         "Look who’s back! ",
+            //         style: TextStyle(
+            //           fontSize: 32,
+            //           fontWeight: FontWeight.bold,
+            //           color: Color.fromARGB(255, 255, 255, 255),
+            //         ),
+            //       ),
+
+            //     ],
+            //   ),
+            // ),
+
 
             Container(
               width: double.infinity,

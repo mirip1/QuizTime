@@ -28,8 +28,6 @@ class _LoginScreenState extends State<LoginScreen> {
         const SnackBar(content: Text("Inicio de sesión correcto")),
       );
       Navigator.pushNamed(context, '/quiz');
-      
-                     
     } on FirebaseAuthException catch (e) {
       // Manejo de errores de Firebase Authentication
       String message;
@@ -43,8 +41,14 @@ class _LoginScreenState extends State<LoginScreen> {
         case 'invalid-email':
           message = 'Correo electrónico inválido.';
           break;
+        case 'network-request-failed':
+          message = 'Error de conexión. Verifica tu internet.';
+          break;
+        case 'too-many-requests':
+          message = 'Demasiados intentos. Inténtalo más tarde.';
+          break;
         default:
-          message = 'Ha ocurrido un error. Inténtalo de nuevo.';
+          message = 'Error: ${e.message}';
       }
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(message)),
@@ -86,7 +90,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: _emailController,
                   decoration: InputDecoration(
                     hintText: "Email",
-                    prefixIcon: const Icon(Icons.email, color: Color(0xFFE31749)),
+                    prefixIcon:
+                        const Icon(Icons.email, color: Color(0xFFE31749)),
                     filled: true,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
@@ -103,7 +108,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: "Password",
-                    prefixIcon: const Icon(Icons.lock, color: Color(0xFFE31749)),
+                    prefixIcon:
+                        const Icon(Icons.lock, color: Color(0xFFE31749)),
                     filled: true,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
