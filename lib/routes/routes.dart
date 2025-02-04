@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiztime/screens/scores.dart';
 import '../screens/login.dart';
 import '../screens/register.dart';
 import '../screens/home.dart';
@@ -39,10 +40,14 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
         }
       }
       return _errorRoute();
+    case '/highscore':
+      return MaterialPageRoute(builder: (_) =>  const HighScoreScreen());
+
 
     default:
       return _errorRoute();
   }
+
 }
 
 Route<dynamic> _errorRoute() {
