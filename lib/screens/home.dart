@@ -110,41 +110,37 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                
               ),
-              
             ),
-            //             Container(
-            //   width: double.infinity,
-            //   padding: const EdgeInsets.all(16.0),
-            //   margin: const EdgeInsets.symmetric(horizontal: 16.0),
-            //   decoration: BoxDecoration(
-            //     color: const Color(0xFFE31749),
-            //     borderRadius: BorderRadius.circular(12.0),
-            //     boxShadow: const [
-            //       BoxShadow(
-            //         color: Colors.black26,
-            //         blurRadius: 4.0,
-            //         offset: Offset(0, 2),
-            //       ),
-            //     ],
-            //   ),
-            //   child: const Column(
-            //     crossAxisAlignment: CrossAxisAlignment.start,
-            //     children: [
-            //       Text(
-            //         "Look who’s back! ",
-            //         style: TextStyle(
-            //           fontSize: 32,
-            //           fontWeight: FontWeight.bold,
-            //           color: Color.fromARGB(255, 255, 255, 255),
-            //         ),
-            //       ),
-
-            //     ],
-            //   ),
-            // ),
-
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16.0),
+              margin: const EdgeInsets.symmetric(horizontal: 16.0),
+              decoration: BoxDecoration(
+                color: const Color(0xFFE31749),
+                borderRadius: BorderRadius.circular(12.0),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 4.0,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "HighScore ",
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 255, 255, 255),
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
             Container(
               width: double.infinity,
