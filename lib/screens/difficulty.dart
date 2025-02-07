@@ -37,7 +37,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen> {
         displayCategory = widget.category;
     }
   }
-
+  //Metodo que devuleve un color dependiendo de la difficultad que se le pasa
   Color _getColorForDifficulty(String difficulty) {
     switch (difficulty) {
       case "Easy":

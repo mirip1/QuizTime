@@ -38,6 +38,9 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return _errorRoute();
     case '/highscore':
       return MaterialPageRoute(builder: (_) =>  const HighScoreScreen());
+    
+    case '/credit':
+      return MaterialPageRoute(builder: (_) =>  const CreditsScreen());
 
 
     default:

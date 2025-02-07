@@ -36,14 +36,14 @@ class _TriviaScreenState extends State<TriviaScreen> {
     _fetchQuestions();
   }
 
+
+//Metodo para guardar los puntos en Firebase si es su marca personal
 void _saveScoreToFirebase(String category, String difficulty, int score) async {
   final user = FirebaseAuth.instance.currentUser;
   if (user == null) {
-    print("Error: Usuario no autenticado");
     return;
   }
 
-  print("✅ Usuario autenticado: ${user.uid}");
 
   int finalScore = _calculateFinalScore(difficulty, score);
 
@@ -72,7 +72,7 @@ void _saveScoreToFirebase(String category, String difficulty, int score) async {
   }
 }
 
-
+  //Metodo que calcula los puntos segun la difficultad y las respuestas respondidas correctamente
   int _calculateFinalScore(String difficulty, int score) {
     if (difficulty == 'easy') return score * 1;
     if (difficulty == 'medium') return (score * 1.5).round();
@@ -80,6 +80,7 @@ void _saveScoreToFirebase(String category, String difficulty, int score) async {
     return score;
   }
 
+  //metodo que llama a la api y muestra las preguntas
   Future<void> _fetchQuestions() async {
     setState(() => _isLoading = true);
 
@@ -119,6 +120,7 @@ void _saveScoreToFirebase(String category, String difficulty, int score) async {
     }
   }
 
+  //Metodo para iniciar un contador
   void _startTimer() {
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -130,6 +132,7 @@ void _saveScoreToFirebase(String category, String difficulty, int score) async {
     });
   }
 
+  //Metodo que muestra las respuestas y las mezcla
   void _setCurrentAnswers() {
     if (_questions.isNotEmpty) {
       final currentQuestion = _questions[_currentQuestionIndex];
@@ -137,11 +140,13 @@ void _saveScoreToFirebase(String category, String difficulty, int score) async {
     }
   }
 
+  //Texto que formateea el texto cogido de la api para que sea legible
   String formatText(String text) {
     final unescape = HtmlUnescape();
     return unescape.convert(text);
   }
 
+  //metodo para pasar a la  siguiente pregunta
   void _nextQuestion() {
     _timer?.cancel();
 
@@ -158,6 +163,7 @@ void _saveScoreToFirebase(String category, String difficulty, int score) async {
     }
   }
 
+  //metodo que comprueba si una respuesta es correcta
   void _checkAnswer(String selectedAnswer) {
     _timer?.cancel();
     final correctAnswer = _questions[_currentQuestionIndex]['correct_answer'];
@@ -170,6 +176,7 @@ void _saveScoreToFirebase(String category, String difficulty, int score) async {
     }
   }
 
+  //metodo para mostrar el dialogo si has perdido
   void _showGameOverDialog() async {
     _timer?.cancel();
     int finalScore = _calculateFinalScore(widget.difficulty, _score);
@@ -190,11 +197,11 @@ void _saveScoreToFirebase(String category, String difficulty, int score) async {
     // Guardar el puntaje en Firebase (solo si es un nuevo PB)
     _saveScoreToFirebase(widget.category, widget.difficulty, _score);
 
-    // Construir el mensaje de puntuación
-    String scoreMessage = "Tu puntuación: $finalScore";
+   
+    String scoreMessage = "Your score: $finalScore";
     if (isNewPB) scoreMessage += " (PB)"; // Agregar (PB) si es récord
 
-    // Mostrar el diálogo con la puntuación
+    // Mostrar el diálogo con la puntuación si pierdes
     showDialog(
       // ignore: use_build_context_synchronously
       context: context,
@@ -208,20 +215,21 @@ void _saveScoreToFirebase(String category, String difficulty, int score) async {
               Navigator.pop(context);
               Navigator.pushNamed(context, "/quiz");
             },
-            child: const Text('Salir'),
+            child: const Text('Exit'),
           ),
           TextButton(
             onPressed: () {
               Navigator.pop(context);
               _restartGame();
             },
-            child: const Text('Reiniciar'),
+            child: const Text('Restart'),
           ),
         ],
       ),
     );
   }
 
+  //metodo para mostrar el dialogo si has perdido
   void _showGameResult() {
     _timer?.cancel();
 
@@ -232,21 +240,22 @@ void _saveScoreToFirebase(String category, String difficulty, int score) async {
       barrierDismissible: false,
       builder: (context) => AlertDialog(
         title: const Text('¡Juego terminado!'),
-        content: Text('Tu puntuación es: $_score/30'),
+        content: Text('Tu puntuación es: $_score'),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.pop(context);
               Navigator.pushNamedAndRemoveUntil(
-                  context, '/home', (route) => false);
+                  context, '/quiz', (route) => false);
             },
-            child: const Text('Salir'),
+            child: const Text('Exit'),
           ),
         ],
       ),
     );
   }
 
+  //MEtodo que muestar un mensaje de error
   void _showErrorDialog(String message) {
     showDialog(
       context: context,
@@ -263,7 +272,7 @@ void _saveScoreToFirebase(String category, String difficulty, int score) async {
       ),
     );
   }
-
+  //metodo para reiniciar el juego
   void _restartGame() {
     _timer?.cancel();
     setState(() {

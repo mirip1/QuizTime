@@ -8,7 +8,7 @@ class ApiService {
   Future<List<dynamic>> getQuestions({
     required int amount,
     String? difficulty,
-    int? category, // Cambiado a int
+    int? category, 
     String? type,
   }) async {
     // Construcción dinámica de parámetros
